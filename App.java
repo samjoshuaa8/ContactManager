@@ -1,5 +1,4 @@
 // import java.util.Scanner;
-import java.util.ArrayList;
 
 public class App {
         public static void main(String[] args){
@@ -19,17 +18,27 @@ public class App {
 
         // cm.read_csv(filename);
 
-        ArrayList<Contact> cs = cm.loadContacts(filename);
+        // ArrayList<Contact> cs = cm.loadContacts(filename);
         // for (Contact i : cs){
         //     System.out.println(i.name);
         // }
 
-        Contact c = new Contact("1", "Joshua", "9444658442", "samjoshuaa8@gmail.com", " ", " ");
-        cs.add(c);
+        // Contact c = new Contact("1", "Joshua", "9444658442", "samjoshuaa8@gmail.com", " ", " ");
+        // cs.add(c);
 
-        cm.exportContacts(filename, cs);
+        // cm.exportContacts(filename, cs);
 
-        ArrayList<Contact> _cs = cm.loadContacts(filename);
-        System.out.println(_cs.size());
+        // ArrayList<Contact> _cs = cm.loadContacts(filename);
+        // System.out.println(_cs.size());
+
+        cm.loadContacts(filename);
+        System.out.println(cm.contacts.size());
+
+        // cm.addContact("7","Mister Terrific","555-789-0123","michael.holt@t-spheres.com","HoltCorp Labs, Gateway City","Fair Play!");
+
+        // cm.displayContacts();
+
+        cm.exportContacts(filename);
+        System.out.println(cm.contacts.size());
     }
 }

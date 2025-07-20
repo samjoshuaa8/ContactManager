@@ -3,7 +3,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
@@ -23,13 +22,14 @@ public class ContactManager{
     // }
 
     public ArrayList<Contact> loadContacts(String filename){
-        contacts.clear();
+        // this.contacts.clear();
         String line = "";
         try(BufferedReader br = new BufferedReader(new FileReader(filename))){
             while((line = br.readLine()) != null){
-                String[] s = line.split(","); 
+                // String[] s = line.split(","); 
+                String[] s = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); //
                 Contact c = new Contact(s[0], s[1], s[2], s[3], s[4], s[5]);
-                contacts.add(c);
+                this.contacts.add(c);
             }
         }
         catch(FileNotFoundException e){
@@ -38,13 +38,23 @@ public class ContactManager{
         catch(IOException e){
             e.printStackTrace();
         }
-        return contacts;
+        return this.contacts;
     }
 
-    public void exportContacts(String filename, ArrayList<Contact> contacts){
+    public void displayContacts(){
+        for(Contact c : this.contacts){
+            System.out.println(c.toText());
+        }
+    }
+
+    public void addContact(String index, String name, String phoneNumber, String emailAddress, String address, String notes){
+        this.contacts.add(new Contact(index, name, phoneNumber, emailAddress, "\""+address+"\"", "\""+notes+"\""));
+    }
+
+    public void exportContacts(String filename){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(filename))){
-            for(int i = 0; i<contacts.size(); i++){
-                Contact item = contacts.get(i);
+            for(int i = 0; i<this.contacts.size(); i++){
+                Contact item = this.contacts.get(i);
                 bw.write(item.index + "," +item.name + "," + item.phoneNumber + "," + item.emailAddress + "," + item.address + "," + item.notes+"\n");
             }
         }
