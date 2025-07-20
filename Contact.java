@@ -1,13 +1,11 @@
 public class Contact{
-    String index;
     String name;
     String phoneNumber;
     String emailAddress;
     String address;
     String notes;
 
-    public Contact(String index, String name, String phoneNumber, String emailAddress, String address, String notes){
-        this.index = index;
+    public Contact(String name, String phoneNumber, String emailAddress, String address, String notes){
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
@@ -15,7 +13,7 @@ public class Contact{
         this.notes = notes;
     }
 
-    public String toText(){
-        return String.format("%3S. | %-15S | %-15S | %-35S | %-50S | %-70S", this.index, this.name, this.phoneNumber, this.emailAddress, this.address, this.notes);
+    public String toText(int index){
+        return String.format("%3d. | %-15S | %-15S | %-35S | %-50S | %-70S", index, this.name, this.phoneNumber, this.emailAddress, this.address, this.notes).toLowerCase();
     }
 }

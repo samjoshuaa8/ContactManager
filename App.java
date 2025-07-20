@@ -23,7 +23,7 @@ public class App {
         //     System.out.println(i.name);
         // }
 
-        // Contact c = new Contact("1", "Joshua", "9444658442", "samjoshuaa8@gmail.com", " ", " ");
+        // Contact c = new Contact("Joshua", "9444658442", "samjoshuaa8@gmail.com", " ", " ");
         // cs.add(c);
 
         // cm.exportContacts(filename, cs);
@@ -32,13 +32,15 @@ public class App {
         // System.out.println(_cs.size());
 
         cm.loadContacts(filename);
-        System.out.println(cm.contacts.size());
+        // System.out.println(cm.contacts.size());
 
-        // cm.addContact("7","Mister Terrific","555-789-0123","michael.holt@t-spheres.com","HoltCorp Labs, Gateway City","Fair Play!");
-
-        // cm.displayContacts();
+        cm.addContact("Dick Grayson","555-456-7890","dick.grayson@batfamily.org","Wayne Manor, Gotham City","Holy [exclamation], Batman!");
+        cm.displayContacts();
+        cm.searchContacts("de");
+        cm.updateContact(8, "Dick Grayson (Robin)","555-456-7890","dick.grayson@batfamily.org","Wayne Manor, Gotham City","Holy [exclamation], Batman!");
+        cm.deleteContact(8);
 
         cm.exportContacts(filename);
-        System.out.println(cm.contacts.size());
+        // System.out.println(cm.contacts.size());
     }
 }

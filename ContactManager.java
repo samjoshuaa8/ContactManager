@@ -28,7 +28,7 @@ public class ContactManager{
             while((line = br.readLine()) != null){
                 // String[] s = line.split(","); 
                 String[] s = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)"); //
-                Contact c = new Contact(s[0], s[1], s[2], s[3], s[4], s[5]);
+                Contact c = new Contact(s[1], s[2], s[3], s[4], s[5]);
                 this.contacts.add(c);
             }
         }
@@ -41,21 +41,44 @@ public class ContactManager{
         return this.contacts;
     }
 
+    public void addContact(String name, String phoneNumber, String emailAddress, String address, String notes){
+        this.contacts.add(new Contact(name, phoneNumber, emailAddress, "\""+address+"\"", "\""+notes+"\""));
+    }
+
+    public void updateContact(int index, String name, String phoneNumber, String emailAddress, String address, String notes){
+        Contact c = this.contacts.get(index);
+        c.name = name;
+        c.phoneNumber = phoneNumber;
+        c.emailAddress = emailAddress;
+        c.address = address;
+        c.notes = notes;
+    }
+
     public void displayContacts(){
         for(Contact c : this.contacts){
-            System.out.println(c.toText());
+            System.out.println(c.toText(contacts.indexOf(c)));
         }
     }
 
-    public void addContact(String index, String name, String phoneNumber, String emailAddress, String address, String notes){
-        this.contacts.add(new Contact(index, name, phoneNumber, emailAddress, "\""+address+"\"", "\""+notes+"\""));
+    public void searchContacts(String words){
+        words.toLowerCase();
+        for(int i = 0; i<this.contacts.size();i++){
+            if (contacts.get(i).toText(i).contains(words)){
+                System.out.println(contacts.get(i).toText(i));
+            }
+        }
+
+    }
+
+    public void deleteContact(int index){
+        this.contacts.remove(index);
     }
 
     public void exportContacts(String filename){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(filename))){
             for(int i = 0; i<this.contacts.size(); i++){
                 Contact item = this.contacts.get(i);
-                bw.write(item.index + "," +item.name + "," + item.phoneNumber + "," + item.emailAddress + "," + item.address + "," + item.notes+"\n");
+                bw.write(i + "," +item.name + "," + item.phoneNumber + "," + item.emailAddress + "," + item.address + "," + item.notes+"\n");
             }
         }
         catch(FileNotFoundException e){
